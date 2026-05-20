@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 /**
@@ -10,7 +6,7 @@ package Modelo;
  */
 import java.util.ArrayList;
 import java.util.List;
-public class Socios extends Usuario{
+public class Socio extends Usuario{
     
     private static final long serialVersionUID=1L;
     
@@ -21,7 +17,7 @@ public class Socios extends Usuario{
     private TipoSocio tipo;
     private List<Reserva> reservas;
     
-    public Socios (String nombre, String correo, String clave, String telefono, String direccion, String tarjetaCredito, TipoSocio tipo){
+    public Socio (String nombre, String correo, String clave, String telefono, String direccion, String tarjetaCredito, TipoSocio tipo){
         super(correo, clave);
         this.nombre=nombre;
         this.telefono=telefono;

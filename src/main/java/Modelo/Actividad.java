@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 /**
@@ -33,25 +29,43 @@ public class Actividad implements Serializable{
     public String getTitulo() {
         return titulo;
     }
+    public void setTitulo(String titulo) { 
+        this.titulo = titulo;
+    }
 
     public TipoActividad getTipo() {
         return tipo;
+    }
+    public void setTipo(TipoActividad tipo) {
+        this.tipo = tipo;
     }
 
     public Sala getSala() {
         return sala;
     }
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
 
     public List<Horarios> getHorarios() {
         return horarios;
+    }
+    public void setHorarios(List<Horarios> horarios) {
+        this.horarios = horarios;
     }
 
     public String getMonitor() {
         return monitor;
     }
+    public void setMonitor(String monitor) {
+        this.monitor = monitor;
+    }
 
     public String getImagen() {
         return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override

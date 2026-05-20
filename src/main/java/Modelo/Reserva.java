@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 /**
@@ -14,13 +10,13 @@ public class Reserva implements Serializable{
     
     private static final long serialVersionUID=1L;
     
-    private Socios socio;
+    private Socio socio;
     private Actividad actividad;
     private Horarios horario;
     private LocalDate fecha;
     private double importe;
     
-    public Reserva(Socios socio, Actividad actividad, Horarios horario, LocalDate fecha, double importe){
+    public Reserva(Socio socio, Actividad actividad, Horarios horario, LocalDate fecha, double importe){
         this.socio=socio;
         this.actividad=actividad;
         this.horario=horario;
@@ -28,7 +24,7 @@ public class Reserva implements Serializable{
         this.importe=importe;
     }
 
-    public Socios getSocio() {
+    public Socio getSocio() {
         return socio;
     }
 
