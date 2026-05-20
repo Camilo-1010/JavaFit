@@ -83,7 +83,7 @@ public class Socio extends Usuario{
 
     @Override
     public String toString() {
-        return "Socios{" + "nombre=" + nombre + "correo=" + correo + "tipo=" + tipo + '}';
+        return "Socios{" + "nombre= " + nombre + "correo= " + correo + "tipo= " + tipo + '}';
     }
     
 }

@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazGrafica;
-
+import Modelo.Gimnasio;
+import Modelo.Usuario;
+import Modelo.Administrador;
+import Modelo.Socio;
 /**
  *
  * @author monto
  */
 public class VentanaLog extends javax.swing.JFrame {
     
+    private Gimnasio miGimnasio;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaLog.class.getName());
 
     /**
@@ -17,6 +21,11 @@ public class VentanaLog extends javax.swing.JFrame {
      */
     public VentanaLog() {
         initComponents();
+        // 1. Cargamos el gimnasio desde el archivo .dat
+    this.miGimnasio = Gimnasio.cargarDatos();
+    
+    // 2. Ejecutamos el rellenado automático (por si no había archivo previo)
+    this.miGimnasio.generarDatosDePrueba();
     }
 
     /**
@@ -28,21 +37,134 @@ public class VentanaLog extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCorreo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnAcceder = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        pswContraseña = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFitAcceso");
+
+        txtCorreo.addActionListener(this::txtCorreoActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel1.setText("Bienvenido a JavaFit.");
+
+        btnAcceder.setBackground(new java.awt.Color(102, 102, 255));
+        btnAcceder.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        btnAcceder.setText("Acceder");
+        btnAcceder.addActionListener(this::btnAccederActionPerformed);
+
+        btnRegistrar.setBackground(new java.awt.Color(102, 102, 255));
+        btnRegistrar.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        btnRegistrar.setText("Registrar nuevo Socio");
+        btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
+
+        pswContraseña.addActionListener(this::pswContraseñaActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jLabel2.setText("Correo:");
+
+        jLabel3.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jLabel3.setText("Contraseña:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(pswContraseña))
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegistrar)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pswContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnAcceder))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        pack();
+        setBounds(0, 0, 421, 323);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void pswContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswContraseñaActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+        // TODO add your handling code here:
+        String correoIntroducido = txtCorreo.getText().trim();
+        String claveIntroducida = new String(pswContraseña.getPassword());
+
+        if (correoIntroducido.isEmpty() || claveIntroducida.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, rellena todos los campos.", "Campos vacíos", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Buscamos al usuario en la lista del Gimnasio
+        Usuario usuarioLogueado = null;
+        for (Usuario u : miGimnasio.getUsuarios()) {
+            if (u.getCorreo().equalsIgnoreCase(correoIntroducido)) {
+            usuarioLogueado = u;
+            break;
+            }
+        }
+
+        // 4. Comprobamos si las credenciales son correctas
+        if (usuarioLogueado != null && usuarioLogueado.ComprobarClave(claveIntroducida)) {
+
+            if (usuarioLogueado instanceof Administrador) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido, Administrador.");
+            } 
+            else if (usuarioLogueado instanceof Socio) {
+                Socio socioActual = (Socio) usuarioLogueado;
+                javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido, " + socioActual.getNombre());
+            }
+    
+        } 
+        else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de Login", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAccederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +192,12 @@ public class VentanaLog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAcceder;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField pswContraseña;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
