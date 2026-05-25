@@ -38,6 +38,6 @@ public class Horarios implements Serializable{
 
     @Override
     public String toString() {
-        return "Horarios{" + "dia=" + dia + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + '}';
+        return "Horarios{" + "dia= " + dia + ", horaInicio= " + horaInicio + ", horaFin= " + horaFin + '}';
     }
 }

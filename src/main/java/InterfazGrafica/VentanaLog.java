@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazGrafica;
-import Modelo.Gimnasio;
-import Modelo.Usuario;
-import Modelo.Administrador;
-import Modelo.Socio;
+import Modelo.*;
 /**
  *
  * @author monto
@@ -47,28 +44,30 @@ public class VentanaLog extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFitAcceso");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(800, 800));
 
         txtCorreo.addActionListener(this::txtCorreoActionPerformed);
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
         jLabel1.setText("Bienvenido a JavaFit.");
 
         btnAcceder.setBackground(new java.awt.Color(102, 102, 255));
-        btnAcceder.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        btnAcceder.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         btnAcceder.setText("Acceder");
         btnAcceder.addActionListener(this::btnAccederActionPerformed);
 
         btnRegistrar.setBackground(new java.awt.Color(102, 102, 255));
-        btnRegistrar.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrar nuevo Socio");
         btnRegistrar.addActionListener(this::btnRegistrarActionPerformed);
 
         pswContraseña.addActionListener(this::pswContraseñaActionPerformed);
 
-        jLabel2.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel2.setText("Correo:");
 
-        jLabel3.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,44 +77,45 @@ public class VentanaLog extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel2))
+                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                .addComponent(pswContraseña))
-                            .addComponent(jLabel1)))
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pswContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistrar)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(91, 91, 91)
+                        .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(btnRegistrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jLabel1)))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pswContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pswContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(36, 36, 36)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar)
-                    .addComponent(btnAcceder))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(148, 148, 148))
         );
 
-        setBounds(0, 0, 421, 323);
+        setBounds(450, 80, 714, 637);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -154,6 +154,10 @@ public class VentanaLog extends javax.swing.JFrame {
 
             if (usuarioLogueado instanceof Administrador) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido, Administrador.");
+
+                VentanaAdmin va = new VentanaAdmin(miGimnasio);
+                va.setVisible(true);
+                this.dispose();
             } 
             else if (usuarioLogueado instanceof Socio) {
                 Socio socioActual = (Socio) usuarioLogueado;

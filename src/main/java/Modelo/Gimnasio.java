@@ -113,7 +113,7 @@ public class Gimnasio implements Serializable {
         //Crear 4 Socios
         Socio socio1 = new Socio("Juan camilo", "juan@mail.com", "1234", "600111000", "Calle Verdugo 12", "ES123", TipoSocio.BASICO);
         Socio socio2 = new Socio("Ana Gómez", "ana@mail.com", "1234", "600333222", "Avenida Sol 45", "ES333", TipoSocio.VIP);
-        Socio socio3 = new Socio("Miguel Martínez", "luis@mail.com", "1234", "600444666", "Plaza Mayor 1", "ES112", TipoSocio.BASICO);
+        Socio socio3 = new Socio("Guille Bachi", "guille@mail.com", "1234", "600444666", "Plaza Mayor 1", "ES112", TipoSocio.BASICO);
         Socio socio4 = new Socio("Laura López", "laura@mail.com", "1234", "600666888", "Calle Luna 9", "ES999", TipoSocio.VIP);
 
         registrarSocio(socio1); registrarSocio(socio2);

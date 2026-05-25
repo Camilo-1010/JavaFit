@@ -46,7 +46,7 @@ public class Reserva implements Serializable{
 
     @Override
     public String toString() {
-        return "Reserva{" + "socio=" + socio + ", actividad=" + actividad + ", horario=" + horario + ", fecha=" + fecha + ", importe=" + importe + '}';
+        return "Reserva{" + "socio= " + socio + ", actividad= " + actividad + ", horario= " + horario + ", fecha= " + fecha + ", importe= " + importe + '}';
     }
     
 }
