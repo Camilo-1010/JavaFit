@@ -61,6 +61,7 @@ public class DialogoActividad extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -125,6 +126,8 @@ public class DialogoActividad extends javax.swing.JDialog {
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +150,8 @@ public class DialogoActividad extends javax.swing.JDialog {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
-                            .addComponent(cbxSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbxSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -202,7 +206,8 @@ public class DialogoActividad extends javax.swing.JDialog {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar))
+                    .addComponent(jLabel11))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -251,7 +256,7 @@ public class DialogoActividad extends javax.swing.JDialog {
                 .addGap(34, 34, 34))
         );
 
-        pack();
+        setBounds(450, 80, 719, 508);
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkEspecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEspecialActionPerformed
@@ -329,6 +334,7 @@ public class DialogoActividad extends javax.swing.JDialog {
     private javax.swing.JCheckBox chkEspecial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

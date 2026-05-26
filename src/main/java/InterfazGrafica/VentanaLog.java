@@ -42,6 +42,7 @@ public class VentanaLog extends javax.swing.JFrame {
         pswContraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFitAcceso");
@@ -70,6 +71,9 @@ public class VentanaLog extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"))); // NOI18N
+        jLabel5.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,15 +94,17 @@ public class VentanaLog extends javax.swing.JFrame {
                         .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(btnRegistrar))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
+                        .addGap(167, 167, 167)
                         .addComponent(jLabel1)))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addComponent(jLabel5)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -206,6 +212,7 @@ public class VentanaLog extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField pswContraseña;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
