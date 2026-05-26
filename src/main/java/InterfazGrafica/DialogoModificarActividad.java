@@ -9,28 +9,61 @@ import Modelo.*;
  *
  * @author monto
  */
-public class DialogoActividad extends javax.swing.JDialog {
+public class DialogoModificarActividad extends javax.swing.JDialog {
     
     private Gimnasio miGimnasio;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DialogoActividad.class.getName());
+    private Modelo.Actividad actividadOg;
+    private int filaActividad;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DialogoModificarActividad.class.getName());
 
     /**
-     * Creates new form DialogoActividad
+     * Creates new form DialogoModificarActividad
      */
-    public DialogoActividad(java.awt.Frame parent, boolean modal, Gimnasio gym) {
+    public DialogoModificarActividad(java.awt.Frame parent, boolean modal, Gimnasio gym, Modelo.Actividad actividad, int fila) {
         super(parent, modal);
         initComponents();
         this.miGimnasio = gym;
+        this.actividadOg = actividad;
+        this.filaActividad = fila;
+        
         cbxSalas.removeAllItems();
         for (Modelo.Sala s : gym.getSalas()) {
             cbxSalas.addItem(s.getNombre());
         }
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YOGA", "ZUMBA", "SPINNING", "PILATES", "CROSSFIT", "CARDIO", "NATACION" }));
         cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO" }));
+        //RELLENAR LAS CAJAS CON LOS DATOS DE LA ACTIVIDAD
+        txtTitulo.setText(actividad.getTitulo());
+        txtMonitor.setText(actividad.getMonitor());
+        cbxSalas.setSelectedItem(actividad.getSala().getNombre());
+        cbxTipo.setSelectedItem(actividad.getTipo().toString());
         
-        // 3. Bloquear textos de actividad especial por defecto
-        txtPrecio.setEnabled(false);
-        txtDescripcion.setEnabled(false);
+        // Extraer el horario
+        if (!actividad.getHorarios().isEmpty()) {
+            Modelo.Horarios h = actividad.getHorarios().get(0);
+            cbxDia.setSelectedItem(h.getDia().toString());
+            // Ojo: Esto depende de cómo cargaste las horas en el ComboBox
+            cbxHoraInicio.setSelectedItem(h.getHoraInicio().toString()); 
+            cbxHoraFin.setSelectedItem(h.getHoraFin().toString());
+            
+        }
+        //actividad especial
+        if (actividad instanceof Modelo.ActividadEspecial) {
+            //casteo
+            Modelo.ActividadEspecial actEspecial = (Modelo.ActividadEspecial) actividad;
+
+            chkEspecial.setSelected(true);
+            txtPrecio.setEnabled(true);
+            txtDescripcion.setEnabled(true);
+            
+            txtPrecio.setText(String.valueOf(actEspecial.getPrecio()));
+            txtDescripcion.setText(actEspecial.getDescripcion());
+        } else {
+            // Si es normal, lo dejamos desactivado
+            chkEspecial.setSelected(false);
+            txtPrecio.setEnabled(false);
+            txtDescripcion.setEnabled(false);
+        }
     }
 
     /**
@@ -45,53 +78,69 @@ public class DialogoActividad extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         txtMonitor = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
-        chkEspecial = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JFormattedTextField();
+        cbxDia = new javax.swing.JComboBox<>();
+        txtDescripcion = new javax.swing.JTextField();
         cbxHoraInicio = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        chkEspecial = new javax.swing.JCheckBox();
         cbxHoraFin = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbxSalas = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         cbxTipo = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        cbxDia = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
-        jLabel1.setText("Añadir nueva Actividad:");
+        jLabel1.setText("Modificar una Actividad:");
 
         txtTitulo.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
 
         txtMonitor.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
 
-        chkEspecial.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        chkEspecial.setText("¿Es especial?");
-        chkEspecial.addActionListener(this::chkEspecialActionPerformed);
+        jLabel8.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel8.setText("Día:");
 
-        jLabel2.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jLabel2.setText("Titulo:");
-
-        jLabel3.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jLabel3.setText("Monitor:");
+        cbxDia.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
 
         cbxHoraInicio.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         cbxHoraInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", " " }));
 
+        jLabel9.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
+        jLabel9.setText("Precio:");
+
+        chkEspecial.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        chkEspecial.setText("¿Es especial?");
+        chkEspecial.addActionListener(this::chkEspecialActionPerformed);
+
         cbxHoraFin.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         cbxHoraFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00" }));
 
+        jLabel10.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
+        jLabel10.setText("Descripción:");
+
+        jLabel2.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel2.setText("Titulo:");
+
         jLabel4.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel4.setText("Horario Inicio:");
+
+        btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
+        btnCancelar.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
+
+        jLabel3.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel3.setText("Monitor:");
 
         jLabel5.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel5.setText("Horario Fin:");
@@ -101,30 +150,14 @@ public class DialogoActividad extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel6.setText("Sala:");
 
-        btnGuardar.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+        btnActualizar.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         cbxTipo.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel7.setText("Tipo de Actividad:");
-
-        jLabel8.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jLabel8.setText("Día:");
-
-        cbxDia.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
-        jLabel9.setText("Precio:");
-
-        jLabel10.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
-        jLabel10.setText("Descripción:");
-
-        btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
-        btnCancelar.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,7 +182,7 @@ public class DialogoActividad extends javax.swing.JDialog {
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
                             .addComponent(cbxSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,16 +206,12 @@ public class DialogoActividad extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(chkEspecial)
                 .addGap(137, 137, 137))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(213, 213, 213)
                 .addComponent(jLabel1)
@@ -193,6 +222,10 @@ public class DialogoActividad extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(126, 126, 126))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addComponent(btnActualizar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +281,7 @@ public class DialogoActividad extends javax.swing.JDialog {
                             .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
 
@@ -261,67 +294,68 @@ public class DialogoActividad extends javax.swing.JDialog {
         txtDescripcion.setEnabled(estaMarcado);
     }//GEN-LAST:event_chkEspecialActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try {
-        // 1. Recoger datos básicos de los TextField
-        String titulo = txtTitulo.getText();
-        String monitor = txtMonitor.getText();
-        
-        // 2. Buscar el objeto Sala real usando el nombre del ComboBox
-        String nombreSala = cbxSalas.getSelectedItem().toString();
-        Modelo.Sala salaElegida = null;
-        for (Modelo.Sala s : miGimnasio.getSalas()) {
-            if (s.getNombre().equals(nombreSala)) {
-                salaElegida = s;
-                break;
-            }
-        }
-        
-        // 3. Crear la Lista de Horarios convirtiendo los textos a formato Hora
-        java.time.LocalTime horaInicio = java.time.LocalTime.parse(cbxHoraInicio.getSelectedItem().toString());
-        java.time.LocalTime horaFin = java.time.LocalTime.parse(cbxHoraFin.getSelectedItem().toString());
-        Modelo.DiaSemana dia = Modelo.DiaSemana.valueOf(cbxDia.getSelectedItem().toString());
-        
-        Modelo.Horarios nuevoHorario = new Modelo.Horarios(dia, horaInicio, horaFin);
-        java.util.List<Modelo.Horarios> listaHorarios = new java.util.ArrayList<>();
-        listaHorarios.add(nuevoHorario);
-        
-        // 4. Tipo de Actividad
-        Modelo.TipoActividad tipo = Modelo.TipoActividad.valueOf(cbxTipo.getSelectedItem().toString());
-        
-        // 5. ¿Es Especial o Normal? Creamos y guardamos
-        if (chkEspecial.isSelected()) {
-            double precio = Double.parseDouble(txtPrecio.getText());
-            String desc = txtDescripcion.getText();
-            
-            Modelo.ActividadEspecial nueva = new Modelo.ActividadEspecial(titulo, tipo, salaElegida, listaHorarios, monitor, "img/default.png", precio, desc);
-            miGimnasio.registrarActividad(nueva);
-            
-        } else {
-            Modelo.Actividad nueva = new Modelo.Actividad(titulo, tipo, salaElegida, listaHorarios, monitor, "img/default.png");
-            miGimnasio.registrarActividad(nueva);
-        }
-        
-        // 6. Cerramos la ventana con éxito
-        javax.swing.JOptionPane.showMessageDialog(this, "Actividad añadida correctamente.");
-        this.dispose();
-        
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar. Revisa que el precio sea un número y los datos estén completos.\n" + e.getMessage());
-    }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        try {
+            // 1. Recoger datos básicos de los TextField
+            String titulo = txtTitulo.getText();
+            String monitor = txtMonitor.getText();
+
+            // 2. Buscar el objeto Sala real usando el nombre del ComboBox
+            String nombreSala = cbxSalas.getSelectedItem().toString();
+            Modelo.Sala salaElegida = null;
+            for (Modelo.Sala s : miGimnasio.getSalas()) {
+                if (s.getNombre().equals(nombreSala)) {
+                    salaElegida = s;
+                    break;
+                }
+            }
+
+            // 3. Crear la Lista de Horarios convirtiendo los textos a formato Hora
+            java.time.LocalTime horaInicio = java.time.LocalTime.parse(cbxHoraInicio.getSelectedItem().toString());
+            java.time.LocalTime horaFin = java.time.LocalTime.parse(cbxHoraFin.getSelectedItem().toString());
+            Modelo.DiaSemana dia = Modelo.DiaSemana.valueOf(cbxDia.getSelectedItem().toString());
+
+            Modelo.Horarios nuevoHorario = new Modelo.Horarios(dia, horaInicio, horaFin);
+            java.util.List<Modelo.Horarios> listaHorarios = new java.util.ArrayList<>();
+            listaHorarios.add(nuevoHorario);
+
+            // 4. Tipo de Actividad
+            Modelo.TipoActividad tipo = Modelo.TipoActividad.valueOf(cbxTipo.getSelectedItem().toString());
+
+            // 5. ¿Es Especial o Normal? Creamos y guardamos
+           
+            if (chkEspecial.isSelected()) {
+                double precio = Double.parseDouble(txtPrecio.getText());
+                String desc = txtDescripcion.getText();
+
+                Modelo.ActividadEspecial modificada = new Modelo.ActividadEspecial(titulo, tipo, salaElegida, listaHorarios, monitor, "img/default.png", precio, desc);
+                miGimnasio.getActividades().set(filaActividad, modificada);
+
+            } else {
+                Modelo.Actividad modificada = new Modelo.Actividad(titulo, tipo, salaElegida, listaHorarios, monitor, "img/default.png");
+                miGimnasio.getActividades().set(filaActividad, modificada);
+            }
+
+            // 6. Cerramos la ventana con éxito
+            javax.swing.JOptionPane.showMessageDialog(this, "Actividad modificada correctamente.");
+            this.dispose();
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al modificar: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cbxDia;
     private javax.swing.JComboBox<String> cbxHoraFin;
     private javax.swing.JComboBox<String> cbxHoraInicio;

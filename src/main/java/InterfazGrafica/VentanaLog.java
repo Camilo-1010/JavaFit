@@ -119,7 +119,8 @@ public class VentanaLog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        DialogoRegistroSocio ventanaRegistro = new DialogoRegistroSocio(this, true, miGimnasio);
+        ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void pswContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContraseñaActionPerformed
@@ -160,19 +161,14 @@ public class VentanaLog extends javax.swing.JFrame {
                 this.dispose();
             } 
             else if (usuarioLogueado instanceof Socio) {
-
                 Socio socioActual = (Socio) usuarioLogueado;
-
                 JOptionPane.showMessageDialog(this, "Bienvenido, " + socioActual.getNombre());
-
                 // AQUÍ SE ABRE LA VENTANA SOCIO
                 VentanaSocio vs = new VentanaSocio(miGimnasio, socioActual);
                 vs.setVisible(true);
-
                 //Cerramos la ventana de login
                 this.dispose();
 }
-    
         } 
         else {
             javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de Login", javax.swing.JOptionPane.ERROR_MESSAGE);

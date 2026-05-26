@@ -89,6 +89,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
         btnAñadirAct.addActionListener(this::btnAñadirActActionPerformed);
 
         btnModificarAct.setText("Modificar Actividad");
+        btnModificarAct.addActionListener(this::btnModificarActActionPerformed);
 
         btnEliminarAct.setText("Eliminar Actividad");
         btnEliminarAct.addActionListener(this::btnEliminarActActionPerformed);
@@ -252,14 +253,24 @@ public class VentanaAdmin extends javax.swing.JFrame {
 
     private void btnAñadirActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActActionPerformed
         DialogoActividad ventanaNueva = new DialogoActividad(this, true, miGimnasio);
-        // 2. La mostramos en pantalla (El programa se pausa en esta línea hasta que la cierres)
         ventanaNueva.setVisible(true); 
-
-        // 3. Cuando la ventanita se cierra, ejecutamos nuestro método mágico
-        // Esto recargará la tabla para mostrar la nueva actividad y guardará el archivo .dat
         refrescarYGuardar();
-// Si pulsa Cancelar o la 'X', el programa simplemente ignora el clic y no hace nada.
+
     }//GEN-LAST:event_btnAñadirActActionPerformed
+
+    private void btnModificarActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActActionPerformed
+        int filaSeleccionada = tblActividades.getSelectedRow();
+
+
+    if (filaSeleccionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una actividad de la tabla primero.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; // 
+    }
+    Modelo.Actividad actividadElegida = miGimnasio.getActividades().get(filaSeleccionada);
+    DialogoModificarActividad ventanaModificar = new DialogoModificarActividad(this, true, miGimnasio, actividadElegida, filaSeleccionada);
+    ventanaModificar.setVisible(true);
+    refrescarYGuardar();
+    }//GEN-LAST:event_btnModificarActActionPerformed
     private void cargarTablaActividades() {
     // 1. Enganchamos el "cable HDMI" (El Modelo) de tu tabla
     javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblActividades.getModel();
