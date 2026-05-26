@@ -20,7 +20,17 @@ public class VentanaAdmin extends javax.swing.JFrame {
     public VentanaAdmin(Gimnasio gym) {
         initComponents();
         this.miGimnasio = gym;
+        
+        btnCerrarSesion.addActionListener(evt -> {
+             miGimnasio.guardarDatos();
+             new VentanaLog().setVisible(true);
+             this.dispose();
+        });
+        
         cargarTablaActividades();
+        cargarTablaSocios();
+        cargarTablaReservas();
+        refrescarYGuardar();
     }
 
     /**
@@ -45,21 +55,22 @@ public class VentanaAdmin extends javax.swing.JFrame {
         btnEliminarAct = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tlbSocios = new javax.swing.JTable();
+        tblSocios = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tlbReservas = new javax.swing.JTable();
+        tblReservas = new javax.swing.JTable();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
         jLabel2.setText("Panel de Administrador:");
 
         btnCerrarSesion.setBackground(new java.awt.Color(255, 0, 0));
         btnCerrarSesion.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
 
         tblActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,10 +86,12 @@ public class VentanaAdmin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblActividades);
 
         btnAñadirAct.setText("Añadir Nueva Actividad");
+        btnAñadirAct.addActionListener(this::btnAñadirActActionPerformed);
 
         btnModificarAct.setText("Modificar Actividad");
 
         btnEliminarAct.setText("Eliminar Actividad");
+        btnEliminarAct.addActionListener(this::btnEliminarActActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -112,7 +125,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Actividades", jPanel2);
 
-        tlbSocios.setModel(new javax.swing.table.DefaultTableModel(
+        tblSocios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -120,31 +133,31 @@ public class VentanaAdmin extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Correo", "Title 3", "Title 4", "Title 5"
+                "Nombre", "Correo", "Teléfono", "Dirección", "Tipo"
             }
         ));
-        jScrollPane2.setViewportView(tlbSocios);
+        jScrollPane2.setViewportView(tblSocios);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lista de Socios", jPanel3);
 
-        tlbReservas.setModel(new javax.swing.table.DefaultTableModel(
+        tblReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -152,26 +165,26 @@ public class VentanaAdmin extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Tipo", "Monitor", "Sala", "Especial"
+                "Socio", "Actividad", "Fecha", "Horario", "Importe"
             }
         ));
-        jScrollPane3.setViewportView(tlbReservas);
+        jScrollPane3.setViewportView(tblReservas);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
 
         jTabbedPane1.addTab("Registro de Reservas", jPanel4);
@@ -180,8 +193,8 @@ public class VentanaAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
                 .addComponent(btnCerrarSesion)
@@ -215,6 +228,38 @@ public class VentanaAdmin extends javax.swing.JFrame {
 
         setBounds(450, 80, 714, 638);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActActionPerformed
+        int filaSeleccionada = tblActividades.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una actividad de la tabla primero.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar esta actividad?", "Confirmar borrado", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+            // 4. Borramos la actividad de la lista real del gimnasio
+            miGimnasio.getActividades().remove(filaSeleccionada);
+            refrescarYGuardar();
+    
+            javax.swing.JOptionPane.showMessageDialog(this, "Actividad eliminada con éxito.");
+}
+    }//GEN-LAST:event_btnEliminarActActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnAñadirActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActActionPerformed
+        DialogoActividad ventanaNueva = new DialogoActividad(this, true, miGimnasio);
+        // 2. La mostramos en pantalla (El programa se pausa en esta línea hasta que la cierres)
+        ventanaNueva.setVisible(true); 
+
+        // 3. Cuando la ventanita se cierra, ejecutamos nuestro método mágico
+        // Esto recargará la tabla para mostrar la nueva actividad y guardará el archivo .dat
+        refrescarYGuardar();
+// Si pulsa Cancelar o la 'X', el programa simplemente ignora el clic y no hace nada.
+    }//GEN-LAST:event_btnAñadirActActionPerformed
     private void cargarTablaActividades() {
     // 1. Enganchamos el "cable HDMI" (El Modelo) de tu tabla
     javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblActividades.getModel();
@@ -228,7 +273,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
         // Comprobamos si es VIP/Especial para poner "Sí" o "No" en la última columna
         String esEspecial = "No";
         if (act instanceof Modelo.ActividadEspecial) {
-            esEspecial = "Sí (Pago Extra)";
+            esEspecial = "Sí";
         }
         
         // 4. Preparamos una "fila" con los datos exactos de esta actividad
@@ -243,6 +288,46 @@ public class VentanaAdmin extends javax.swing.JFrame {
         // 5. Añadimos la fila al modelo, y la tabla se actualizará sola
         modelo.addRow(fila);
     }
+}
+    private void cargarTablaSocios() {
+    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblSocios.getModel();
+    modelo.setRowCount(0); // Limpiar tabla
+    
+    for (Modelo.Usuario u : miGimnasio.getUsuarios()) {
+        if (u instanceof Modelo.Socio) {
+            Modelo.Socio socio = (Modelo.Socio) u; // Casteo para poder usar sus métodos
+            
+            Object[] fila = {
+                socio.getNombre(),
+                socio.getCorreo(),
+                socio.getTelefono(),
+                socio.getDireccion(),
+                socio.getTipo().toString()
+            };
+            modelo.addRow(fila);
+        }
+    }
+}
+    private void cargarTablaReservas() {
+    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tblReservas.getModel();
+    modelo.setRowCount(0); // Limpiar tabla
+    
+    for (Modelo.Reserva r : miGimnasio.getReservas()) {
+        Object[] fila = {
+            r.getSocio().getNombre(),
+            r.getActividad().getTitulo(),
+            r.getFecha().toString(),
+            r.getHorario().getHoraInicio().toString() + " - " + r.getHorario().getHoraFin().toString(), 
+            r.getImporte()
+        };
+        modelo.addRow(fila);
+    }
+}
+    private void refrescarYGuardar() {
+    // 1. Refresca la tabla para que se vea el cambio visualmente
+    cargarTablaActividades(); 
+    
+    miGimnasio.guardarDatos(); 
 }
     /**
      * @param args the command line arguments
@@ -265,7 +350,8 @@ public class VentanaAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblActividades;
-    private javax.swing.JTable tlbReservas;
-    private javax.swing.JTable tlbSocios;
+    private javax.swing.JTable tblReservas;
+    private javax.swing.JTable tblSocios;
     // End of variables declaration//GEN-END:variables
 }
+

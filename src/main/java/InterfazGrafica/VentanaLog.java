@@ -46,7 +46,6 @@ public class VentanaLog extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFitAcceso");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
         txtCorreo.addActionListener(this::txtCorreoActionPerformed);
 
