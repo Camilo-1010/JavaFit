@@ -30,8 +30,6 @@ public class DialogoModificarActividad extends javax.swing.JDialog {
         for (Modelo.Sala s : gym.getSalas()) {
             cbxSalas.addItem(s.getNombre());
         }
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YOGA", "ZUMBA", "SPINNING", "PILATES", "CROSSFIT", "CARDIO", "NATACION" }));
-        cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO" }));
         //RELLENAR LAS CAJAS CON LOS DATOS DE LA ACTIVIDAD
         txtTitulo.setText(actividad.getTitulo());
         txtMonitor.setText(actividad.getMonitor());
@@ -111,6 +109,7 @@ public class DialogoModificarActividad extends javax.swing.JDialog {
         jLabel8.setText("Día:");
 
         cbxDia.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO" }));
 
         cbxHoraInicio.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         cbxHoraInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", " " }));
@@ -155,6 +154,7 @@ public class DialogoModificarActividad extends javax.swing.JDialog {
         btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
         cbxTipo.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YOGA", "MUSCULACION", "CARDIO", "NATACION" }));
 
         jLabel7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel7.setText("Tipo de Actividad:");

@@ -184,9 +184,7 @@ public class VentanaSocio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        
-    
-int fila = tblActividades.getSelectedRow();
+    int fila = tblActividades.getSelectedRow();
 
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Selecciona una actividad");

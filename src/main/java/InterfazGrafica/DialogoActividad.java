@@ -25,9 +25,6 @@ public class DialogoActividad extends javax.swing.JDialog {
         for (Modelo.Sala s : gym.getSalas()) {
             cbxSalas.addItem(s.getNombre());
         }
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YOGA", "ZUMBA", "SPINNING", "PILATES", "CROSSFIT", "CARDIO", "NATACION" }));
-        cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO" }));
-        
         // 3. Bloquear textos de actividad especial por defecto
         txtPrecio.setEnabled(false);
         txtDescripcion.setEnabled(false);
@@ -106,6 +103,7 @@ public class DialogoActividad extends javax.swing.JDialog {
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         cbxTipo.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "YOGA", "MUSCULACION", "CARDIO", "NATACION" }));
 
         jLabel7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel7.setText("Tipo de Actividad:");
@@ -114,6 +112,7 @@ public class DialogoActividad extends javax.swing.JDialog {
         jLabel8.setText("Día:");
 
         cbxDia.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        cbxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO" }));
 
         jLabel9.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         jLabel9.setText("Precio:");

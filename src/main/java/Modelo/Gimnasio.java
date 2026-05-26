@@ -101,11 +101,11 @@ public class Gimnasio implements Serializable {
 
         //Crear 6 Actividades
         Actividad act1 = new Actividad("Yoga", TipoActividad.YOGA, salaZen, horaManana, "Marta Arizona", "img/yoga.png");
-        Actividad act2 = new Actividad("Zumba", TipoActividad.ZUMBA, salaFitness, horaTarde, "Juan Carlos", "img/zumba.png");
-        Actividad act3 = new Actividad("Ciclo Indoor", TipoActividad.SPINNING, salaFitness, horaManana, "Luis Felipe", "img/spin.png");
-        Actividad act4 = new Actividad("Pilates Terapéutico", TipoActividad.PILATES, salaZen, horaTarde, "Marta Arizona", "img/pilates.png");
-        Actividad act5 = new Actividad("Crossfit", TipoActividad.CROSSFIT, salaFitness, horaFinde, "Popa", "img/cross.png");
-        ActividadEspecial act6 = new ActividadEspecial("clase de Natación", TipoActividad.NATACION, salaPiscina, horaFinde, "Michael Phelps", "img/natacion.png", 25.0, "Clase centrada en mejorar tu técnica y tiempos");
+        Actividad act2 = new Actividad("Powerlifting", TipoActividad.MUSCULACION, salaFitness, horaTarde, "Juan Carlos", "img/musculacion.png");
+        Actividad act3 = new Actividad("Estilo Mariposa", TipoActividad.NATACION, salaPiscina, horaManana, "Luis Felipe", "img/nado.png");
+        Actividad act4 = new Actividad("Meditación", TipoActividad.YOGA, salaZen, horaTarde, "Marta Arizona", "img/pilates.png");
+        Actividad act5 = new Actividad("Crossfit", TipoActividad.CARDIO, salaFitness, horaFinde, "Popa", "img/cross.png");
+        ActividadEspecial act6 = new ActividadEspecial("clase de Natación", TipoActividad.NATACION, salaPiscina, horaFinde, "Michael Phelps", "img/natacion.png", 20.0, "Clase centrada en mejorar tu técnica y tiempos");
 
         registrarActividad(act1); registrarActividad(act2); registrarActividad(act3);
         registrarActividad(act4); registrarActividad(act5); registrarActividad(act6);
@@ -150,8 +150,7 @@ public class Gimnasio implements Serializable {
     }
     public boolean reservarActividad(Socio socio, Actividad act, Horarios horario, LocalDate fecha) {
 
-
-    // 2. Comprobar aforo
+    //Comprobar aforo
     long reservasActuales = reservas.stream()
         .filter(r -> r.getActividad().equals(act)
         && r.getFecha().equals(fecha)
@@ -166,18 +165,12 @@ public class Gimnasio implements Serializable {
     double precio = 0.0;
 
     if (act instanceof ActividadEspecial esp) {
-        precio = esp.getPrecio();
-        if (socio.esVip()) {
-            precio *= 0.9;
+        precio = socio.calcularPrecioActividad(esp.getPrecio());
         }
-    }
-
-    // 4. Crear reserva
+    //añade la reserva
     Reserva nueva = new Reserva(socio, act, horario, fecha, precio);
-
     reservas.add(nueva);
     socio.añadirReserva(nueva);
-
     return true;
 }
 }

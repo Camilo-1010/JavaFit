@@ -6,10 +6,7 @@ package Modelo;
  */
 public enum TipoActividad {
     YOGA,
-    ZUMBA,
-    SPINNING,
-    PILATES,
-    CROSSFIT,
+    MUSCULACION,
     CARDIO,
     NATACION
 }

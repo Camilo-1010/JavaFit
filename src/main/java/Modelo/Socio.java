@@ -79,7 +79,14 @@ public class Socio extends Usuario{
     }
     public boolean esVip(){
         return tipo == TipoSocio.VIP;
-    } 
+    }
+    public double calcularPrecioActividad(double precioBase) {
+        if (this.tipo == Modelo.TipoSocio.VIP) {
+            return precioBase * 0.90; 
+        } else {
+            return precioBase; 
+        }
+    }
 
     @Override
     public String toString() {
