@@ -4,6 +4,7 @@
  */
 package InterfazGrafica;
 import Modelo.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author monto
@@ -160,9 +161,18 @@ public class VentanaLog extends javax.swing.JFrame {
                 this.dispose();
             } 
             else if (usuarioLogueado instanceof Socio) {
+
                 Socio socioActual = (Socio) usuarioLogueado;
-                javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido, " + socioActual.getNombre());
-            }
+
+                JOptionPane.showMessageDialog(this, "Bienvenido, " + socioActual.getNombre());
+
+                // AQUÍ SE ABRE LA VENTANA SOCIO
+                VentanaSocio vs = new VentanaSocio(miGimnasio, socioActual);
+                vs.setVisible(true);
+
+                //Cerramos la ventana de login
+                this.dispose();
+}
     
         } 
         else {

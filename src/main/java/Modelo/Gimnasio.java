@@ -148,4 +148,36 @@ public class Gimnasio implements Serializable {
         System.out.println("No hay archivo previo. Iniciando gimnasio desde cero.");
         return new Gimnasio();
     }
+    public boolean reservarActividad(Socio socio, Actividad act, Horarios horario, LocalDate fecha) {
+
+
+    // 2. Comprobar aforo
+    long reservasActuales = reservas.stream()
+        .filter(r -> r.getActividad().equals(act)
+        && r.getFecha().equals(fecha)
+        && r.getHorario().equals(horario))
+        .count();
+
+    if (reservasActuales >= act.getSala().getAforoMaximo()) {
+        return false;
+    }
+
+    // 3. Calcular precio
+    double precio = 0.0;
+
+    if (act instanceof ActividadEspecial esp) {
+        precio = esp.getPrecio();
+        if (socio.esVip()) {
+            precio *= 0.9;
+        }
+    }
+
+    // 4. Crear reserva
+    Reserva nueva = new Reserva(socio, act, horario, fecha, precio);
+
+    reservas.add(nueva);
+    socio.añadirReserva(nueva);
+
+    return true;
+}
 }
